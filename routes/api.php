@@ -20,12 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/user', 'App\Http\Controllers\Users\UserController@register');
 
-Route::get('/user', function (Request $request){
-  return true;
-});
+Route::group(["middleware" => ['auth:api', 'verified']], function () {
 
-Route::group(["middleware" => ['auth:api', 'verified']], function() {
-
-  Route::post('/product','App\Http\Controllers\Users\UserController@register');
-
+    Route::get('/user', 'App\Http\Controllers\Users\UserController@details');
+    Route::post('/product', 'App\Http\Controllers\ProductController@create');
+    Route::get('/product/{id}','App\Http\Controllers\ProductController@getProduct');
+    Route::get('/products','App\Http\Controllers\ProductController@getAllProducts');
+    Route::post('/product/{id}','App\Http\Controllers\ProductController@updateProduct');
+    Route::delete('/product/{id}','App\Http\Controllers\ProductController@destroy');
 });

@@ -24,6 +24,10 @@ class User extends Authenticatable
         'email_verified_at'
     ];
 
+    // protected $with =[
+    //     'products'
+    // ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
